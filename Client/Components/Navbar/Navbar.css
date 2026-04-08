@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.navbar_container {
+    @apply md:px-10 md:h-12
+}
+
+.navbar_logout_btn {
+    @apply md:px-2 md:py-0.5 md:rounded-sm
+}
+
+.navbar_email {
+    @apply md:px-2 md:py-0.5
+}
+
+.navbar_modal {
+    @apply font-light cursor-pointer;
+}
+
+.navbar_modal hr {
+    @apply w-[100%] border-t border-white md:relative md:my-1 md:left-4;
+}

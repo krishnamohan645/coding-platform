@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+.course_container{
+    @apply md:mt-2
+}
+.course_card_div{
+    @apply md:px-3 md:py-0.5
+}
+.course_card_right button{
+    @apply md:px-2 md:py-[0.1vw] md:rounded-sm cursor-pointer bg-blue-950 text-white
+}
+.course_container_wrapper{
+    @apply md:w-[900px]
+}
+.slide-item{
+    @apply bg-white border border-black rounded-2xl md:p-10 text-center md:m-10 transition-transform ease-in-out md:hover:transform scale-105
+}
+.slick-list {
+    margin: 0 -10px;
+}
+.slick-slide {
+    padding: 0 10px;
+}
+
+/* Change background color of arrows */
+.slick-prev::before, .slick-next::before {
+    /* color: white !important; */
+    background-color: black;
+    /* padding: 1px; */
+    border-radius: 50%;
+    opacity: 1;
+    position: relative;
+
+}
+

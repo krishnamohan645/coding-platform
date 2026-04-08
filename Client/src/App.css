@@ -1,0 +1,17 @@
+:root {
+  --font-pacifico: 'Pacifico', cursive;
+  --font-geist-sans: 'Geist', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+}
+
+body {
+  font-family: var(--font-geist-sans);
+}
+
+.font-pacifico {
+  font-family: var(--font-pacifico);
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono);
+}

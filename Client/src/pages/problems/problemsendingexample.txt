@@ -1,0 +1,66 @@
+  // const problem = {
+  //   id: parseInt(problemId),
+  //   title: "Two Sum",
+  //   difficulty: "Easy",
+  //   category: "Array",
+  //   description: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+  // You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+  // You can return the answer in any order.`,
+  //   constraints: [
+  //     "2 ≤ nums.length ≤ 10⁴",
+  //     "-10⁹ ≤ nums[i] ≤ 10⁹",
+  //     "-10⁹ ≤ target ≤ 10⁹",
+  //     "Only one valid answer exists.",
+  //   ],
+  //   examples: [
+  //     {
+  //       input: "nums = [2,7,11,15], target = 9",
+  //       output: "[0,1]",
+  //       explanation: "Because nums[0] + nums[1] == 9, we return [0, 1].",
+  //     },
+  //     {
+  //       input: "nums = [3,2,4], target = 6",
+  //       output: "[1,2]",
+  //       explanation: "Because nums[1] + nums[2] == 6, we return [1, 2].",
+  //     },
+  //   ],
+  //   hints: [
+  //     "A really brute force way would be to search for all possible pairs of numbers but that would be too slow.",
+  //     "The best way to maintain a mapping of each element in the array to its index is a hash map.",
+  //     "For each element, check if target - element exists in the hash map.",
+  //   ],
+  //   tags: ["Array", "Hash Table"],
+  //   companies: ["Google", "Amazon", "Microsoft"],
+  //   acceptance: 49.2,
+  //   submissions: 5234567,
+  //   relatedProblems: [
+  //     { id: 15, title: "3Sum", difficulty: "Medium" },
+  //     { id: 18, title: "4Sum", difficulty: "Medium" },
+  //     {
+  //       id: 167,
+  //       title: "Two Sum II - Input Array Is Sorted",
+  //       difficulty: "Medium",
+  //     },
+  //   ],
+  // };
+
+  // const languages = [
+  //   {
+  //     id: "javascript",
+  //     name: "JavaScript",
+  //     template: `var twoSum = function(nums, target) {\n    // Your solution here\n};`,
+  //   },
+  //   {
+  //     id: "python",
+  //     name: "Python",
+  //     template: `class Solution:\n    def twoSum(self, nums, target):\n        # Your solution here\n        pass`,
+  //   },
+  //   {
+  //     id: "java",
+  //     name: "Java",
+  //     template: `class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        // Your solution here\n    }\n}`,
+  //   },
+  // ];
+

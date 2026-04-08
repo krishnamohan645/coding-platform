@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.home_container{
+    @apply md:mt-6
+}
+.home_card_text{
+    @apply md:mt-6
+}
+.home_card_btm{
+}
