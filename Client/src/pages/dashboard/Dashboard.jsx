@@ -4,7 +4,7 @@ import StatsCard from "../../components/ui/StatsCard";
 import ProgressBar from "../../components/ui/ProgressBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getLanguages, getTopics } from "../topicSidebar/language.slice";
-import { getUserDetails } from "../../components/header/Header.slice";
+import { getUserDetails } from "../../components/header/header.slice.js";
 
 import { fetchUserStats } from "../profile/profile.slice";
 
