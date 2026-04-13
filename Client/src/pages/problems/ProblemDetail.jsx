@@ -68,7 +68,8 @@ export default function ProblemDetail() {
     setIsLoadingHint(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/ai/hint",
+        // "http://localhost:5000/api/ai/hint",
+        "https://coding-platform-production-5910.up.railway.app/api/ai/hint",
         {
           problemTitle: problem.title,
           description: problem.description?.text || problem.description,

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/ai";
+// const API_URL = "http://localhost:5000/api/ai";
+const API_IRL = "https://coding-platform-production-5910.up.railway.app/api/ai";
 
 export default function AIChatWidget({ context = {} }) {
   const [isOpen, setIsOpen] = useState(false);

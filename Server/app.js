@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5173 || https://coding-platform-kohl-two.vercel.app",
     credentials: true,
   })
 );
@@ -37,6 +37,6 @@ app.use(require("./api/middlewares/errorHandler"));
 sequelize.sync().then(() => {
   console.log("🟢 DB Synced");
   app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
+    console.log(`🚀 Server running at http://localhost:${PORT} `);
   });
 });
