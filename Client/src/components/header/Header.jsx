@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserDetails, logOutUser } from "./Header.slice";
+import { getUserDetails, logOutUser } from "./header.slice";
 
 export default function Header() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);

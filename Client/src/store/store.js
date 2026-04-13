@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import LanguageReducer from "../pages/topicSidebar/language.slice";
 import TopicsReducer from "../pages/subTopics/topic.slice";
-import UserReducer from "../components/header/Header.slice";
+import UserReducer from "../components/header/header.slice";
 import LoginReducer from "../components/login/login.slice";
 import practiceProblemsReducer from "../pages/practiceProblems/practiceProblems.slice";
 import problemDetailReducer from "../pages/problems/problemDetail.slice";
