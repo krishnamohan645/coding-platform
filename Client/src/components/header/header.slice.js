@@ -32,7 +32,7 @@ const UserSlice = createSlice({
   },
 
   reducers: {
-    addUserId: (state, action) => {
+    addUserId: (state) => {
       state.user = null;
       state.status = "idle";
     },
@@ -54,7 +54,7 @@ const UserSlice = createSlice({
     builder.addCase(logOutUser.pending, (state) => {
       state.status = "Loading";
     });
-    builder.addCase(logOutUser.fulfilled, (state, { payload }) => {
+    builder.addCase(logOutUser.fulfilled, (state) => {
       state.user = null;
       state.status = "Success";
     });
