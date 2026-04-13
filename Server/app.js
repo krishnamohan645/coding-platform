@@ -13,9 +13,12 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173 || https://coding-platform-kohl-two.vercel.app",
+    origin: [
+      "http://localhost:5173",
+      "https://coding-platform-kohl-two.vercel.app",
+    ],
     credentials: true,
-  })
+  }),
 );
 app.use("/api/languages", require("./api/routes/language.routes"));
 app.use("/api/topics", require("./api/routes/topic.routes"));
@@ -26,7 +29,7 @@ app.use("/api/user", require("./api/routes/user.routes"));
 app.use("/api/auth", require("./api/routes/auth.routes"));
 app.use(
   "/api/practiceProblems",
-  require("./api/routes/practiceProblems.routes")
+  require("./api/routes/practiceProblems.routes"),
 );
 app.use("/api/userActivity", require("./api/routes/userActivity.routes"));
 app.use("/api/ai", require("./api/routes/ai.routes"));
