@@ -3,14 +3,11 @@ const sequelize = require("./config/database");
 const defineAssociations = require("./api/init_Models/associations");
 const db = require("./api/models/index");
 require("dotenv").config();
+
 const cors = require("cors");
+
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-defineAssociations(db);
-const PORT = process.env.PORT || 5000;
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+
 app.use(
   cors({
     origin: [
@@ -21,6 +18,17 @@ app.use(
     credentials: true,
   }),
 );
+
+app.options("*", cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
+const PORT = process.env.PORT || 5000;
+defineAssociations(db);
+
 app.use("/api/languages", require("./api/routes/language.routes"));
 app.use("/api/topics", require("./api/routes/topic.routes"));
 app.use("/api/subtopics", require("./api/routes/subtopic.routes"));
