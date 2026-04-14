@@ -29,6 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cors({ origin: true, credentials: true }));
 
 
 app.use(express.json());
