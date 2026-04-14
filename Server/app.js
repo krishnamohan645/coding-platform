@@ -17,6 +17,7 @@ app.use(
       "http://localhost:5173",
       "https://coding-platform-kohl-two.vercel.app",
     ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   }),
 );
