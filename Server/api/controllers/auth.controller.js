@@ -13,7 +13,7 @@ exports.sendOtp = async (req, res, next) => {
       where: { email },
       defaults: {
         name: name || null,
-        autProvider: "email",
+        authProvider: "email",
         isEmailVerified: false,
       },
     });

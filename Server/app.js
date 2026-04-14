@@ -8,25 +8,26 @@ const cors = require("cors");
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://coding-platform-kohl-two.vercel.app",
-];
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "https://coding-platform-kohl-two.vercel.app",
+  ];
+  const origin = req.headers.origin;
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-        callback(null, true);
-      } else {
-        callback(null, false);
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
-    credentials: true,
-  }),
-);
+  if (allowedOrigins.includes(origin) || (origin && origin.endsWith(".vercel.app"))) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  next();
+});
 
 
 
