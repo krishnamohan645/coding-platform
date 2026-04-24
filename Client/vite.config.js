@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://coding-platform-production-5910.up.railway.app",
+        target: "https://coding-platform-w4eb.onrender.com",
         changeOrigin: true,
         secure: true,
       },
