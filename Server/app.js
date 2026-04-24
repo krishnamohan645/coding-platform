@@ -53,6 +53,33 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
 };
 
+app.use((req, res, next) => {
+  const origin = req.headers.origin?.replace(/\/$/, "");
+
+  console.log(`${req.method} ${req.originalUrl} origin=${origin || "none"}`);
+
+  if (isAllowedOrigin(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+    res.setHeader("Vary", "Origin");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,POST,PUT,DELETE,OPTIONS",
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      req.headers["access-control-request-headers"] ||
+        "Content-Type,Authorization,X-Requested-With,Accept",
+    );
+  }
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
 app.use(cors(corsOptions));
 app.options(/.*/, cors(corsOptions));
 
