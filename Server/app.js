@@ -15,7 +15,6 @@ app.use(
       : [
           "http://localhost:5173",
           "https://coding-platform-kohl-two.vercel.app",
-          "https://judge029.p.rapidapi.com/submissions",
         ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
