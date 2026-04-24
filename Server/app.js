@@ -8,7 +8,6 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const app = express();
-const server = http.createServer(app);
 
 app.set("trust proxy", 1);
 
@@ -102,6 +101,10 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "ok", service: "coding-platform-api" });
+});
+
 app.use("/api/languages", require("./api/routes/language.routes"));
 app.use("/api/topics", require("./api/routes/topic.routes"));
 app.use("/api/subtopics", require("./api/routes/subtopic.routes"));
@@ -117,12 +120,14 @@ app.use("/api/userActivity", require("./api/routes/userActivity.routes"));
 app.use("/api/ai", require("./api/routes/ai.routes"));
 app.use(require("./api/middlewares/errorHandler"));
 
+const server = http.createServer(app);
+
 server.on("error", (error) => {
   console.error("HTTP server failed:", error);
 });
 
 server.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on 0.0.0.0:${PORT}`);
   console.log(`Railway PORT env: ${process.env.PORT || "not set"}`);
   console.log(`Allowed CORS origins: ${allowedOrigins.join(", ")}`);
 });
