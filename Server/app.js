@@ -1,4 +1,5 @@
 const express = require("express");
+const http = require("http");
 const sequelize = require("./config/database");
 const defineAssociations = require("./api/init_Models/associations");
 const db = require("./api/models/index");
@@ -7,6 +8,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const app = express();
+const server = http.createServer(app);
 
 app.set("trust proxy", 1);
 
@@ -61,6 +63,14 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 defineAssociations(db);
 
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught exception:", error);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled rejection:", reason);
+});
+
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
@@ -80,8 +90,14 @@ app.use("/api/userActivity", require("./api/routes/userActivity.routes"));
 app.use("/api/ai", require("./api/routes/ai.routes"));
 app.use(require("./api/middlewares/errorHandler"));
 
-app.listen(PORT, "0.0.0.0", () => {
+server.on("error", (error) => {
+  console.error("HTTP server failed:", error);
+});
+
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`Railway PORT env: ${process.env.PORT || "not set"}`);
+  console.log(`Allowed CORS origins: ${allowedOrigins.join(", ")}`);
 });
 
 sequelize
