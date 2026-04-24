@@ -69,7 +69,7 @@ export default function ProblemDetail() {
     try {
       const res = await axios.post(
         // "http://localhost:5000/api/ai/hint",
-        "coding-platform-production-5910.up.railway.app/api/ai/hint",
+        "https://coding-platform-production-5910.up.railway.app/api/ai/hint",
         {
           problemTitle: problem.title,
           description: problem.description?.text || problem.description,
