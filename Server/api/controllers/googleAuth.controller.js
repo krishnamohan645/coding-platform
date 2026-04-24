@@ -2,6 +2,7 @@ const { OAuth2Client } = require("google-auth-library");
 const Users = require("../models/users.model");
 require("dotenv").config();
 const generateToken = require("../../config/jwt");
+const { authCookieOptions } = require("../utils/cookieOptions");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -40,12 +41,7 @@ exports.googleLogin = async (req, res, next) => {
     const token = generateToken(user.id);
     console.log(token, "token");
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    })
+    res.cookie("token", token, authCookieOptions);
    
 
     res.status(200).json({

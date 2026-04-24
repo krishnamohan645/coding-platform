@@ -8,6 +8,7 @@ import { getProblemDetail, initUserActivity } from "./problemDetail.slice";
 import { getLanguages } from "../topicSidebar/language.slice";
 import axios from "axios";
 import AIChatWidget from "../../components/AIChatWidget";
+import { AI_API_URL } from "../../config/api";
 
 export default function ProblemDetail() {
   const { id: problemId, conceptId } = useParams();
@@ -68,8 +69,7 @@ export default function ProblemDetail() {
     setIsLoadingHint(true);
     try {
       const res = await axios.post(
-        // "http://localhost:5000/api/ai/hint",
-        "https://coding-platform-production-5910.up.railway.app/api/ai/hint",
+        `${AI_API_URL}/hint`,
         {
           problemTitle: problem.title,
           description: problem.description?.text || problem.description,

@@ -3,6 +3,10 @@ const Users = require("../models/users.model");
 const generateToken = require("../../config/jwt");
 const sendEmail = require("../utils/sendEmail");
 const generateOtp = require("../utils/generateOtp");
+const {
+  authCookieOptions,
+  clearAuthCookieOptions,
+} = require("../utils/cookieOptions");
 const bcrypt = require("bcrypt");
 
 exports.sendOtp = async (req, res, next) => {
@@ -66,12 +70,7 @@ exports.verifyOtp = async (req, res, next) => {
     const user = await Users.findOne({ where: { email } });
     const token = generateToken(user.id);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+    res.cookie("token", token, authCookieOptions);
 
     return res.status(200).json({
       message: "OTP verified successfully",
@@ -94,12 +93,7 @@ exports.logoutUser = async (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized" });
     }
     // Clear the token cookie
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 0,
-    });
+    res.clearCookie("token", clearAuthCookieOptions);
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
     next(err);

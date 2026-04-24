@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
-// const API_URL = "http://localhost:5000/api/ai";
-const API_URL = "https://coding-platform-production-5910.up.railway.app/api/ai";
+import { AI_API_URL } from "../config/api";
 
 export default function AIChatWidget({ context = {} }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +23,7 @@ export default function AIChatWidget({ context = {} }) {
 
     try {
       const res = await axios.post(
-        `${API_URL}/chat`,
+        `${AI_API_URL}/chat`,
         {
           message: input,
           context,
