@@ -4,8 +4,10 @@ const defineAssociations = require("./api/init_Models/associations");
 const db = require("./api/models/index");
 require("dotenv").config();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
     origin:

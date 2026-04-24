@@ -3,7 +3,7 @@ const Users = require("../models/users.model");
 
 module.exports = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies?.token;
 
     if (!token) {
       return res.status(401).json({ message: "Unauthorized" });
