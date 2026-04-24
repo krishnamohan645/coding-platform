@@ -80,7 +80,19 @@
 
 const Groq = require("groq-sdk");
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+let groq;
+
+const getGroqClient = () => {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error("GROQ_API_KEY is not configured");
+  }
+
+  if (!groq) {
+    groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+  }
+
+  return groq;
+};
 
 const getAIResponse = async (prompt, context = {}) => {
   const fullPrompt = context.problemTitle
@@ -93,7 +105,7 @@ User Question: ${prompt}
 Please provide a helpful, educational response.`
     : prompt;
 
-  const completion = await groq.chat.completions.create({
+  const completion = await getGroqClient().chat.completions.create({
     model: "llama-3.3-70b-versatile",
     messages: [{ role: "user", content: fullPrompt }],
     temperature: 0.5,

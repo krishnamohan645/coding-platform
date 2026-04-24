@@ -12,17 +12,35 @@ app.set("trust proxy", 1);
 
 const allowedOrigins = (
   process.env.CORS_ORIGIN ||
-  "http://localhost:5173,https://coding-platform-kohl-two.vercel.app"
+  process.env.FRONTEND_URL ||
+  "https://coding-platform-kohl-two.vercel.app"
 )
   .split(",")
   .map((origin) => origin.trim().replace(/\/$/, ""))
   .filter(Boolean);
 
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+
+  try {
+    const { hostname, protocol } = new URL(origin);
+
+    return (
+      allowedOrigins.includes(origin) ||
+      origin.startsWith("http://localhost:") ||
+      origin.startsWith("http://127.0.0.1:") ||
+      (protocol === "https:" && hostname.endsWith(".vercel.app"))
+    );
+  } catch {
+    return false;
+  }
+};
+
 const corsOptions = {
   origin(origin, callback) {
     const requestOrigin = origin?.replace(/\/$/, "");
 
-    if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
+    if (isAllowedOrigin(requestOrigin)) {
       return callback(null, true);
     }
 
@@ -34,8 +52,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-// app.options("*", cors()); // handle preflight for all routes
+app.options(/.*/, cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -63,9 +80,15 @@ app.use("/api/userActivity", require("./api/routes/userActivity.routes"));
 app.use("/api/ai", require("./api/routes/ai.routes"));
 app.use(require("./api/middlewares/errorHandler"));
 
-sequelize.sync().then(() => {
-  console.log("🟢 DB Synced");
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
+sequelize
+  .sync()
+  .then(() => {
+    console.log("DB Synced");
+  })
+  .catch((error) => {
+    console.error("Database sync failed:", error);
+  });
